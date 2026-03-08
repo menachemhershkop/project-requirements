@@ -10,7 +10,7 @@ function AdminDashboard() {
     role:string
   };
   
-  const [user, setUser] = useState<Asmin | null>(null);
+  const [user, setUser] = useState<Admin | null>(null);
     async function getUser():Promise<Admin> {
       const response = await fetch('http://localhost:3000/auth/me', {
         method:'GET',
@@ -19,13 +19,14 @@ function AdminDashboard() {
         }
       })
       if (!response.ok){
-         const data = await response.json();
-        alert(data.message)
+         const err = await response.json();
+        alert(err.message)
+        throw new Error(err.message)
       }
       else{
-       const date: Admin = await response.json()
+       const data: Admin = await response.json()
        
-       return date
+       return data['user']
       }
     }
     
@@ -36,13 +37,15 @@ function AdminDashboard() {
   }, []);
 
 // console.log(user['user'].id);
-
+  if (!user){
+    return <p>Access denaied</p>
+  }
 
 
   
   return (
     <div>
-      <UserCard fullName={user['user'].fullName} agentCode={user['user'].agentCode} role={user['user'].role}/>
+      <UserCard id={user.id} fullName={user.fullName} agentCode={user.agentCode} role={user.role}/>
     </div>
   )
 }

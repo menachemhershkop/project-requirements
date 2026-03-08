@@ -19,13 +19,15 @@ function AgentDashboard() {
         }
       })
       if (!response.ok){
-         const data = await response.json();
-  alert(data.message)
+         const err = await response.json();
+        alert(err.message)
+        throw new Error(err.message)
       }
       else{
-       const date: User = await response.json()
+       const data: User = await response.json()
+      
        
-       return date
+       return data['user']
       }
     }
     
@@ -35,14 +37,15 @@ function AgentDashboard() {
       .catch((err) => console.error(err));
   }, []);
 
-// console.log(user['user'].id);
+console.log(user);
 
-
-
+ if (!user){
+    return <p>Access denaied</p>
+  }
   
   return (
     <div>
-      <UserCard fullName={user['user'].fullName} agentCode={user['user'].agentCode} role={user['user'].role}/>
+      <UserCard id={user.id} fullName={user.fullName} agentCode={user.agentCode} role={user.role}/>
     </div>
   )
 }
