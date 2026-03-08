@@ -9,6 +9,7 @@ function Layout({children}:LayoutProps) {
   return (
     <div>
       <Link to="/">Home</Link>
+      <Link to='/LoginPage'>login</Link>
       <main>{children}</main>
     </div>
   )

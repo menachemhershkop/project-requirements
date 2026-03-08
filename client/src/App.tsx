@@ -1,4 +1,4 @@
-import { LayoutRouteProps, Route, Routes } from 'react-router-dom'
+import {  Route, Routes } from 'react-router-dom'
 import './App.css'
 import Layout from './Components/Layout'
 import LoginPage from './pages/LoginPage'
@@ -29,6 +29,7 @@ function App() {
                
       </Routes>
     </Layout>
+    
     </>
   )
 }

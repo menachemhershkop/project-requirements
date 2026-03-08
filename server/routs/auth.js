@@ -3,6 +3,7 @@ import 'dotenv/config';
 import jwt from 'jsonwebtoken'
 import { authToken } from '../middlewears/tokenExcess.js';
 import { agents } from '../users/agents.js';
+import { adminToken } from '../middlewears/adminAcsess.js';
 const secret = process.env.SECRET;
 
 export const authRout = express();
@@ -25,7 +26,7 @@ authRout.post('/login',(req, res)=>{
 
 authRout.get('/me', authToken, (req, res)=>{
   const {id, agentCode, name, role} = req.user['agent']  
-  console.log(123);
+  
   res.status(200).json({user:{id:id, agentCode:agentCode, fullName:name, role:role}})
 
 })
