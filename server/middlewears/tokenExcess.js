@@ -17,6 +17,7 @@ export function authToken(req, res, next){
     }
 
     req.user = decoded;
+    
     next();
   });
 
