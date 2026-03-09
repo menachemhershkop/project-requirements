@@ -3,30 +3,42 @@ import { authToken } from '../middlewears/tokenExcess.js';
 import multer from 'multer';
 import csv from 'async-csv';
 
-const upload = multer({storage:multer.memoryStorage()});
+const upload = multer({ storage: multer.memoryStorage() });
 export const reportRout = express();
 
-reportRout.post('/', authToken, upload.none(), (req, res)=>{
-    
+reportRout.post('/', authToken, upload.single('image'), (req, res) => {
+
     console.log(req.body);
-    
-        const {category, urgency, message} = req.body;
-        if (!category || !urgency || !message){
-            res.status(400).json({message: 'Fields file less'})
-        }
-        const {id} = req.user['agent']
-        res.status(200).json({report:{id:id, category:category, urgency:urgency, message:message, imagePath:123, scurceType:2314, createAt:new Date().toISOString }})
+
+    const { category, urgency, message } = req.body;
+    if (!category || !urgency || !message) {
+        return res.status(400).json({ message: 'Fields file less' })
+    }
+    const { id } = req.user['agent']
+    const imagePath = req.file ? req.file.path : null;
+    return res.status(201).json({ report: { id: id, category: category, urgency: urgency, message: message, imagePath: imagePath, sourceType: 'manual', createAt: new Date().toISOString } })
 })
 
-reportRout.post('/csv', authToken, upload.single('CSVFile'), (req, res)=>{
-    if (!req.file){
-        res.status(400).json({message:'CSV File are requierd'})
+reportRout.post('/csv', authToken, upload.single('csvFile'), async (req, res) => {
+    if (!req.file) {
+        res.status(400).json({ message: 'CSV File are requierd' })
     }
     const csvFile = req.file.buffer.toString('utf-8');
-    try{
-    csv.parse(csvFile, {columns:true})
-    }catch (err){
-        res.status(400).json({message:'invalid CSV formt'})
+    let rows;
+    try {
+        rows = await csv.parse(csvFile, { columns: true, skip_empty_lines: true, trim: true })
+    } catch (err) {
+        res.status(400).json({ message: 'invalid CSV formt' })
     }
+    for (const row of rows) {
+        if (!row.category || !row.urgency || !row.message) {
+            return res.status(400).json({ message: 'CSV file must containe category, urgancy and messageF' })
+        }
+    }
+    const { id } = req.user['agent'];
+    const reports = rows.map((row)=>({
+            id:id, category:row.category, urgency:row.urgency, message:message ,imagePath:null, sourceType:'CSV',createAt: new Date().toISOString
+    }))
+    return res.status(201).json({imprtedCount:reports.length, report:reports})
     
 })
