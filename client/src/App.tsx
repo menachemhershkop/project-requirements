@@ -16,10 +16,10 @@ function App() {
 
   return (
     <>
-       <Layout>
+    <>
       <Routes>
-       
-        <Route path='/' element={<Home/>}></Route>
+       <Route path='/' element={<Layout/>}>
+        <Route index element={<Home/>}></Route>
         <Route path='/LoginPage' element={<LoginPage/>}></Route>
         <Route path='/MyReportsPage' element={<MyReportPage/>}></Route>
         <Route path='/CSVUploadPage' element={<CSVUploadPage/>}></Route>
@@ -28,8 +28,9 @@ function App() {
         <Route path='/AdminUsersPage' element={<AdminUsersPage/>}></Route>       
         <Route path='/adminReportsPage' element={<AdminREpotrsPage/>}></Route>
         <Route path='/agentDashboard' element={<AgentDashboard/>}></Route>
+        </Route>
       </Routes>
-    </Layout>
+    </>
     
     </>
   )

@@ -1,16 +1,18 @@
 import type { ReactNode } from "react"
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 
 type LayoutProps = {
-    children : ReactNode
+  children: ReactNode
 }
 
-function Layout({children}:LayoutProps) {
+function Layout() {
   return (
     <div>
-      <Link to="/">Home</Link>
-      <Link to='/LoginPage'>login</Link>
-      <main>{children}</main>
+      <div className="navbar">
+        <button><Link to="/">Home</Link></button>
+        <button><Link to='/LoginPage'>login</Link></button>
+      </div>
+        <main><Outlet /></main>
     </div>
   )
 }

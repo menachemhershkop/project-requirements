@@ -1,0 +1,82 @@
+body{
+    background: #a09c9c;
+}
+.homePage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+.navbar{
+    /* background: #000; */
+    display: flex;
+    justify-content: space-around;
+    height: 2em;
+}
+button{
+    background: #8fa884;
+    border-radius: 350px;
+}
+.navbar a{
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
+}
+.login{
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-card{
+    display: grid;
+    justify-content: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: normal;
+    color: #27220f;
+}
+.userCard{
+    display: grid;
+    justify-self: center;
+    border-style: dashed;
+    border-color: black;
+    border: red;
+}
+table {
+  width: 50%;
+  display: inline-table;
+  margin-left: 20vh;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: left;
+}
+table th{
+  background: rgb(121, 102, 102);
+  color: aliceblue;
+}
+table tr:nth-child(even){
+  background: rgb(153, 184, 194);
+}
+table tr{
+    background: rgb(190, 184, 184);
+}
+table tr:hover{
+  background: #4b4052;
+  color: white;
+}
+table tbody :nth-child(odd):hover{
+    background: rgb(88, 88, 55);
+}
+.add{
+    position: absolute;
+    background: #b47070;
+    opacity: 90%;
+    margin-left: 30%;
+}

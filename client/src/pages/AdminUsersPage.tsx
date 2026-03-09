@@ -33,22 +33,46 @@ function AdminUsersPage() {
             
               alert(error)
         });
-    }, []);
+    }, [users]);
 
   console.log(users);
   
  
   return (
     <div>
+      <div>
       <button onClick={()=> setAdd(!add)}>Add user</button>
-      {add && <AddUser/>}
-      {users.map((user)=>{
+      {add && <AddUser/>}</div>
+      {/* {users.map((user)=>{
         return(
           <UserData name={user.name} agentCode={user.agentCode}/>
         )
 
-      })}
-
+      })} */}
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>igentCode</th>
+          <th>name</th>
+          {/* <th>password</th> */}
+          <th>role</th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.map((user)=>{
+          console.log(user);
+          return (
+          <tr>
+            <td>{user.id}</td>
+            <td>{user.agentCode}</td>
+            <td>{user.name}</td>
+            {/* <td>{user.password}</td> */}
+            <td>{user.role}</td>
+          </tr>)
+        })}
+      </tbody>
+    </table>
     </div>
   )
 }

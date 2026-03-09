@@ -32,7 +32,7 @@ else{
 }
 
   return (
-    <div>
+    <div className="login">
       <label htmlFor="agentcode">username:
       <input type="text" id="agentcode" onChange={(e)=>setAgentCode(e.target.value)} />
       </label><br />

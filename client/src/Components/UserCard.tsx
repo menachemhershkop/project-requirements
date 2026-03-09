@@ -8,8 +8,8 @@ function UserCard(props:User) {
     console.log(123, props);
     
   return (
-    <div>
-        {props.fullName}
+    <div className="user-card">
+        
       <h1>Wellcome: {props.fullName}</h1>
       <p>Agentcode: {props.agentCode}</p>
       <p>role: {props.role}</p>

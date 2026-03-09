@@ -24,7 +24,7 @@ function AddUser() {
   }
    }
   return (
-    <div>
+    <div className="add">
         
       <form action="">
         <label htmlFor="name">name <br />
