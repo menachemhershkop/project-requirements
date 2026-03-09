@@ -9,6 +9,7 @@ import AdminDashboard from './pages/AdminDashboard'
 import AdminREpotrsPage from './pages/AdminREpotrsPage'
 import AgentDashboard from './pages/AgentDashboard'
 import Home from './pages/Home'
+import AdminUsersPage from './pages/AdminUsersPage'
 
 function App() {
  
@@ -24,9 +25,9 @@ function App() {
         <Route path='/CSVUploadPage' element={<CSVUploadPage/>}></Route>
         <Route path='/NewReportsPage' element={<NewReportPage/>}></Route>
         <Route path='/AdminDashboard' element={<AdminDashboard/>}></Route>   
+        <Route path='/AdminUsersPage' element={<AdminUsersPage/>}></Route>       
         <Route path='/adminReportsPage' element={<AdminREpotrsPage/>}></Route>
         <Route path='/agentDashboard' element={<AgentDashboard/>}></Route>
-               
       </Routes>
     </Layout>
     

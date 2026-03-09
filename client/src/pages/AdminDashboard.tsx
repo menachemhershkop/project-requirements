@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import UserCard from "../Components/userCard";
+import { useNavigate } from "react-router-dom";
 
 
 function AdminDashboard() {
+  const navigate = useNavigate();
   type Admin = {
     id:number,
     agentCode:string,
@@ -15,7 +17,7 @@ function AdminDashboard() {
       const response = await fetch('http://localhost:3000/auth/me', {
         method:'GET',
         headers: {
-          'authorization': `Bearer ${localStorage.getItem("token")}`
+          'authorization': `Bearer ${localStorage.getItem("token")}`,
         }
       })
       if (!response.ok){
@@ -45,6 +47,7 @@ function AdminDashboard() {
   
   return (
     <div>
+      <button onClick={()=>navigate('/AdminUsersPage')}>See All users</button>
       <UserCard id={user.id} fullName={user.fullName} agentCode={user.agentCode} role={user.role}/>
     </div>
   )
