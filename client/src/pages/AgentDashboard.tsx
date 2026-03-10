@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import UserCard from "../Components/userCard";
+import Reports from "../Components/Reports";
 
 
 function AgentDashboard() {
@@ -46,6 +47,7 @@ console.log(user);
   return (
     <div>
       <UserCard id={user.id} fullName={user.fullName} agentCode={user.agentCode} role={user.role}/>
+      <Reports id={user.id}/>
     </div>
   )
 }

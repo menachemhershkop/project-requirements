@@ -2,11 +2,12 @@ import express from 'express';
 import { authToken } from '../middlewears/tokenExcess.js';
 import multer from 'multer';
 import csv from 'async-csv';
+import { cloudinary } from '../cloudinary/index.js';
 
 const upload = multer({ storage: multer.memoryStorage() });
 export const reportRout = express();
 
-reportRout.post('/', authToken, upload.single('image'), (req, res) => {
+reportRout.post('/',  upload.single('image'), (req, res) => {
 
     console.log(req.body);
 
@@ -16,7 +17,7 @@ reportRout.post('/', authToken, upload.single('image'), (req, res) => {
     }
     const { id } = req.user['agent']
     const imagePath = req.file ? req.file.path : null;
-    return res.status(201).json({ report: { id: id, category: category, urgency: urgency, message: message, imagePath: imagePath, sourceType: 'manual', createAt: new Date().toISOString } })
+    return res.status(201).json({ report: { id: id, category: category, urgency: urgency, message: message, imagePath: imagePath, sourceType: 'form', createAt: new Date().toISOString } })
 })
 
 reportRout.post('/csv', authToken, upload.single('csvFile'), async (req, res) => {
@@ -24,9 +25,11 @@ reportRout.post('/csv', authToken, upload.single('csvFile'), async (req, res) =>
         res.status(400).json({ message: 'CSV File are requierd' })
     }
     const csvFile = req.file.buffer.toString('utf-8');
+    
     let rows;
     try {
         rows = await csv.parse(csvFile, { columns: true, skip_empty_lines: true, trim: true })
+        console.log(rows);
     } catch (err) {
         res.status(400).json({ message: 'invalid CSV formt' })
     }
@@ -37,7 +40,7 @@ reportRout.post('/csv', authToken, upload.single('csvFile'), async (req, res) =>
     }
     const { id } = req.user['agent'];
     const reports = rows.map((row)=>({
-            id:id, category:row.category, urgency:row.urgency, message:message ,imagePath:null, sourceType:'CSV',createAt: new Date().toISOString
+            id:id, category:row.category, urgency:row.urgency, message:row.message ,imagePath:null, sourceType:'CSV',createAt: new Date().toISOString
     }))
     return res.status(201).json({imprtedCount:reports.length, report:reports})
     
