@@ -3,11 +3,19 @@ import { authToken } from '../middlewears/tokenExcess.js';
 import multer from 'multer';
 import csv from 'async-csv';
 import { cloudinary } from '../cloudinary/index.js';
+const fileFilter = (req, file, cb) => {
+  const allowedExtensions = ["image/png", "image/jpg", "image/jpeg"];
 
-const upload = multer({ storage: multer.memoryStorage() });
+  if (allowedExtensions.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+const upload = multer({ storage: multer.memoryStorage() , fileFilter});
 export const reportRout = express();
 
-reportRout.post('/',  upload.single('image'), (req, res) => {
+reportRout.post('/', authToken, upload.single('image'), (req, res) => {
 
     console.log(req.body);
 
@@ -16,7 +24,24 @@ reportRout.post('/',  upload.single('image'), (req, res) => {
         return res.status(400).json({ message: 'Fields file less' })
     }
     const { id } = req.user['agent']
+    cloudinary.uploader.upload_sream({
+        public_id:"cloudinary-tutorial",
+        resource_type:"image",
+    },
+    (error, result)=>{
+        if(error){
+            console.log(error);
+            
+        }
+        else{
+            console.log(result);
+            
+        }
+    }
+).end(rep.file.buffer)
     const imagePath = req.file ? req.file.path : null;
+    console.log(imagePath);
+    
     return res.status(201).json({ report: { id: id, category: category, urgency: urgency, message: message, imagePath: imagePath, sourceType: 'form', createAt: new Date().toISOString } })
 })
 
