@@ -1,11 +1,12 @@
 import { useState } from "react"
 
 
-function AddUser() {
+function AddUser({click}) {
    const [name, setName] = useState('');
    const [agentCode, setAgentCode] =useState('');
    const [role, setRole] = useState('');
    const [password, setPassword] = useState('');
+   const [msg, setMsg] = useState('')
    async function sendUser(){
     console.log(name,agentCode,role,password);
     
@@ -19,8 +20,14 @@ function AddUser() {
   });
   if (response.ok){
   const data = await response.json();
+  click()
   console.log(data['user']);
   
+  }
+  else if (!response.ok){
+    const err = await response.json();
+    setMsg(await err);
+    alert(err['message'])
   }
    }
   return (

@@ -11,38 +11,45 @@ type User = {
 
 function AdminUsersPage() {
   const [add, setAdd] = useState(false)
-  const [users, setUsers] = useState<User>([])
-  useEffect(() => {
-        fetch('http://localhost:3000/admin/users', {
-          method:'GET',
-          headers:{
-            'authorization': `Bearer ${localStorage.getItem("token")}`,
-          }
-        })
-        .then((response) => {
-            if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-            return response.json();
-        })
-            .then((data) => {
-            setUsers(data.users);
-            
-            })
-            .catch((error) => {
-            
-              alert(error)
-        });
-    }, [users]);
+  const [users, setUsers] = useState<User[]>([])
+  const [refrash, setRefrash] =useState(0)
+  const reload = ()=>setRefrash(prev=>prev+1)
+  const list = ()=>{
 
-  console.log(users);
+    fetch('http://localhost:3000/admin/users', {
+    method:'GET',
+    headers:{
+      'authorization': `Bearer ${localStorage.getItem("token")}`,
+    }
+  })
+  .then((response) => {
+      if (!response.ok) {
+      throw new Error('Network response was not ok');
+  }
+      return response.json();
+  })
+      .then((data) => {
+      setUsers(data.users);
+      // setFlag(true)
+      })
+      .catch((error) => {
+      
+        console.log
+        (error)
+  });
+}
+  useEffect(() => {
+    list()
+    console.log(users);
+    }, [refrash]);
+
   
  
   return (
     <div>
       <div>
       <button onClick={()=> setAdd(!add)}>Add user</button>
-      {add && <AddUser/>}</div>
+      {add && <AddUser click={reload}/>}</div>
       {/* {users.map((user)=>{
         return(
           <UserData name={user.name} agentCode={user.agentCode}/>
@@ -61,7 +68,7 @@ function AdminUsersPage() {
       </thead>
       <tbody>
         {users.map((user)=>{
-          console.log(user);
+          // console.log(user);
           return (
           <tr>
             <td>{user.id}</td>
