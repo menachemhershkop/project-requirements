@@ -39,11 +39,13 @@ function Reports({id}) {
    <div>
       <form >
         <select name="urgency" id="urgency" onChange={(e)=>setUrgency(e.target.value)}>
+           <option value="" disabled selected>-- Select an option --</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
         </select>
         <select name="category" id="category" onChange={(e)=>setCategory(e.target.value)}>
+           <option value="" disabled selected>-- Select an option --</option>
             <option value="Intelligence">Intelligence</option>
             <option value="Logistics">Logitics</option>
             <option value="Alert">Alert</option>

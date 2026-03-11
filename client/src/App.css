@@ -80,3 +80,6 @@ table tbody :nth-child(odd):hover{
     opacity: 90%;
     margin-left: 30%;
 }
+img{
+    height: 50px;
+}

@@ -1,6 +1,6 @@
 
 
-function AdminREpotrsPage() {
+function AdminRepotrsPage() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function AdminREpotrsPage() {
   )
 }
 
-export default AdminREpotrsPage
+export default AdminRepotrsPage

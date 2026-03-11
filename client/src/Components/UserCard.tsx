@@ -5,7 +5,7 @@ type User = {
     role:string
   };
 function UserCard(props:User) {
-    console.log(123, props);
+    
     
   return (
     <div className="user-card">
