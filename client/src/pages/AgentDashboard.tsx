@@ -50,6 +50,7 @@ function AgentDashboard() {
       <UserCard id={user.id} fullName={user.fullName} agentCode={user.agentCode} role={user.role}/>
       <Reports id={user.id}/>
       <button onClick={()=>navigate('/MyReportsPage')}>See all my Reports</button>
+      <button onClick={()=>navigate('/CSVUploadPage')}>send csv file</button>
     </div>
   )
 }

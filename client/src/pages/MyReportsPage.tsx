@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 type Reports = {
   id:number,
+  igentCode: string,
   category:string,
   urgency:string,
   message:string,
@@ -62,6 +63,7 @@ function MyReportPage() {
           <th>id</th>
           <th>agentCode</th>
           <th>category</th>
+          <th>urgency</th>
           <th>message</th>
           <th>image</th>
         </tr>
@@ -72,6 +74,7 @@ function MyReportPage() {
           return (
           <tr>
             <td>{report.id}</td>
+            <td>{report.igentCode}</td>
             <td>{report.category}</td>
             <td>{report.urgency}</td>
             <td>{report.message}</td>

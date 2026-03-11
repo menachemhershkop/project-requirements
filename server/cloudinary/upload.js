@@ -1,4 +1,4 @@
-import cloudinary from ".";
+import cloudinary from "./index.js";
 
 export default function uploadCloudenary(image) {
     return new Promise((resolve, reject) => {

@@ -10,7 +10,7 @@ export function filterId(file, id){
     // console.log(data);
     console.log(4);
     
-    const filtered = data.filter(data=> data.id ==id)
+    const filtered = data.filter(data=> data.agentCode ==id)
     console.log(filtered);
     
     return filtered
