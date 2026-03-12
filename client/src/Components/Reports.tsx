@@ -9,7 +9,7 @@ function Reports({id}:UserNunber) {
     const [message, setMessage] = useState('')
     const [urgency, setUrgency] = useState('')
     const [category, setCategory] = useState('')
-    const [send, useSend] = useState('')
+    const [send, setSend] = useState('')
     const navigate = useNavigate();
     const rank = localStorage.getItem('rank')
     const handleSubmit =async (e)=>{
@@ -31,7 +31,7 @@ function Reports({id}:UserNunber) {
   });
   if (response.ok){
   const data = await response.json();
-  useSend('msg send')
+  setSend('msg send')
   console.log(data);
     setTimeout(()=>{
       if (rank== 'agent') navigate('/AgentDashboard');

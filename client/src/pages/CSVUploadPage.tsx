@@ -1,8 +1,12 @@
 import { useState } from "react";
 import Back from "../Components/Back";
+import { useNavigate } from "react-router-dom";
 
 function CSVUploadPage() {
   const [csvFile, setCsvFile] = useState<File | null>(null);
+  const [send, setSend] = useState('')
+  const navigate = useNavigate();
+    const rank = localStorage.getItem('rank')
 
   const sendFile = async () => {
     if (!csvFile) return;
@@ -20,6 +24,13 @@ function CSVUploadPage() {
 
     const data = await response.json();
     console.log(data);
+    setSend('file send')
+  console.log(data);
+    setTimeout(()=>{
+      if (rank== 'agent') navigate('/AgentDashboard');
+  
+   else if (rank == 'admin') navigate('/adminDashboard')
+    }, 5000)
   };
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -42,6 +53,7 @@ function CSVUploadPage() {
         />
         <button type="submit">submit</button>
       </form>
+      <div className="send">{send}</div>
     </div>
   );
 }
