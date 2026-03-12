@@ -79,7 +79,72 @@ table tbody :nth-child(odd):hover{
     background: #b47070;
     opacity: 90%;
     margin-left: 30%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+input{
+    background: #000;
+    margin: 1em;
+}
+.add input:hover{
+    height: 40px;
+}
+.role{
+    display: flex;
+    flex-direction: column;
+    border-style: groove;
+}
+.role input:hover{
+    height: none;
+    color: #b47070;
 }
 img{
     height: 50px;
+}
+.filter{
+    display: flex;
+    /* flex-direction: column; */
+    justify-self: center;
+    width: max-content;
+    gap: 20px;
+    margin-top: 2em;
+ 
+}
+.filter select, input{
+    background: #685050;
+    color: antiquewhite;
+    border-radius: 400px;
+    height: 2em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+.msg{
+    font-family: 'Times New Roman', Times, serif;
+    background: lightskyblue;
+    color: green;
+}
+.report{
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    align-items: center;
+    justify-self: center;
+    color: #27220f;
+    font-size: larger;
+}
+select{
+    background:#685050;
+    color: white;
+}
+.menu{
+    display: flex;
+    justify-content: space-around;
+}
+.send{
+    justify-self: center;
+    color: green;
+    background: lightblue;
+    font-size: xx-large;
+}
+.csv-reports{
+    justify-self: center;
 }

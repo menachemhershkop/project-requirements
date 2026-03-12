@@ -80,3 +80,20 @@ reportRout.get('/', authToken, (req, res)=>{
     }
     return  res.status(200).json({reports:arr})
 })
+
+reportRout.get('/:id'. authToken, (req,res)=>{
+    const param = req.params;
+    if (req.user['agent'].id != param && req.user['agent'].role != 'admin'){
+        return res.status(403).json({message:' Your reqwest is unligule'})
+    }
+    else{
+        const reports =  JSON.parse(fs.readFileSync);
+        const report = reports.find((r)= r.id == param);
+        if (report.length ===0){
+            return res.status(404).json({message:'Report nut found'})
+        }
+        else{
+            return res.status(200).json({report:report})
+        }
+    }
+})

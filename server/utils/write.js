@@ -8,7 +8,7 @@ export default function writeToJson(file, context){
     
     
     obj.push(context);
-    fs.writeFile(file, JSON.stringify(obj), (err)=>{
+    fs.writeFileSync(file, JSON.stringify(obj, null , 2), (err)=>{
         if (err) throw err;
         console.log('updating');
         

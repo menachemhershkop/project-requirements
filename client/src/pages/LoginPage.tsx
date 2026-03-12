@@ -18,8 +18,10 @@ async function connect(agentCode:String, password:String){
   const data = await response.json();
   localStorage.setItem('token', data.token)
   if(data['user'].role == 'agent'){
+    localStorage.setItem('rank', 'agent')
   navigate('/AgentDashboard')}
   else if(data['user'].role == 'admin'){
+    localStorage.setItem('rank', 'admin')
     navigate('/adminDashboard')
   }
 }

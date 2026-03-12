@@ -48,9 +48,11 @@ function AgentDashboard() {
   return (
     <div>
       <UserCard id={user.id} fullName={user.fullName} agentCode={user.agentCode} role={user.role}/>
-      <Reports id={user.id}/>
+      <div className="menu">
+      <button onClick={()=>navigate('/NewReportPage',{state:user.id})}>Send new report</button>
       <button onClick={()=>navigate('/MyReportsPage')}>See all my Reports</button>
-      <button onClick={()=>navigate('/CSVUploadPage')}>send csv file</button>
+      <button onClick={()=>navigate('/CSVUploadPage')}>send csv report's file</button>
+      </div>
     </div>
   )
 }

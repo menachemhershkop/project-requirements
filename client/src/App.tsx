@@ -23,7 +23,7 @@ function App() {
         <Route path='/LoginPage' element={<LoginPage/>}></Route>
         <Route path='/MyReportsPage' element={<MyReportPage/>}></Route>
         <Route path='/CSVUploadPage' element={<CSVUploadPage/>}></Route>
-        <Route path='/NewReportsPage' element={<NewReportPage/>}></Route>
+        <Route path='/NewReportPage' element={<NewReportPage/>}></Route>
         <Route path='/AdminDashboard' element={<AdminDashboard/>}></Route>   
         <Route path='/AdminUsersPage' element={<AdminUsersPage/>}></Route>       
         <Route path='/adminReportsPage' element={<AdminRepotrsPage/>}></Route>

@@ -12,7 +12,7 @@ authRout.post('/login',(req, res)=>{
 
     const {agentCode, password} = req.body;
     if (!agentCode || !password){
-        res.status(400).json({message: "igentCode and password are required"})
+        res.status(400).json({message: "agentCode and password are required"})
     }
     const agent = agents.find((a)=> a.agentCode == agentCode && a.password == password);
     if (!agent){

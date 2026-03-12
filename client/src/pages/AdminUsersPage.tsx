@@ -12,74 +12,69 @@ type User = {
 function AdminUsersPage() {
   const [add, setAdd] = useState(false)
   const [users, setUsers] = useState<User[]>([])
-  const [refrash, setRefrash] =useState(0)
-  const reload = ()=>setRefrash(prev=>prev+1)
-  const list = ()=>{
+  const [refrash, setRefrash] = useState(0)
+  const reload = () => setRefrash(prev => prev + 1)
+  const list = () => {
 
     fetch('http://localhost:3000/admin/users', {
-    method:'GET',
-    headers:{
-      'authorization': `Bearer ${localStorage.getItem("token")}`,
-    }
-  })
-  .then((response) => {
-      if (!response.ok) {
-      throw new Error('Network response was not ok');
-  }
-      return response.json();
-  })
+      method: 'GET',
+      headers: {
+        'authorization': `Bearer ${localStorage.getItem("token")}`,
+      }
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then((data) => {
-      setUsers(data.users);
-      // setFlag(true)
+        setUsers(data.users);
+
       })
       .catch((error) => {
-      
+
         console.log
-        (error)
-  });
-}
+          (error)
+      });
+  }
   useEffect(() => {
     list()
     console.log(users);
-    }, [refrash]);
+  }, [refrash]);
 
-  
- 
+
+
   return (
     <div>
       <div>
-      <button onClick={()=> setAdd(!add)}>Add user</button>
-      {add && <AddUser click={reload}/>}</div>
-      {/* {users.map((user)=>{
-        return(
-          <UserData name={user.name} agentCode={user.agentCode}/>
-        )
+        <button onClick={() => setAdd(!add)}>Add user</button>
+        {add && <AddUser click={reload} close={setAdd} />}</div>
 
-      })} */}
-    <table>
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>igentCode</th>
-          <th>name</th>
-          {/* <th>password</th> */}
-          <th>role</th>
-        </tr>
-      </thead>
-      <tbody>
-        {users.map((user)=>{
-          // console.log(user);
-          return (
+      <table>
+        <thead>
           <tr>
-            <td>{user.id}</td>
-            <td>{user.agentCode}</td>
-            <td>{user.name}</td>
-            {/* <td>{user.password}</td> */}
-            <td>{user.role}</td>
-          </tr>)
-        })}
-      </tbody>
-    </table>
+            <th>id</th>
+            <th>igentCode</th>
+            <th>name</th>
+
+            <th>role</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => {
+
+            return (
+              <tr>
+                <td>{user.id}</td>
+                <td>{user.agentCode}</td>
+                <td>{user.name}</td>
+
+                <td>{user.role}</td>
+              </tr>)
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }

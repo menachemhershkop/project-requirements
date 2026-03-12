@@ -3,22 +3,10 @@ import { authToken } from '../middlewears/tokenExcess.js';
 import { adminToken } from '../middlewears/adminAcsess.js';
 
 import { agents } from '../users/agents.js';
+import atbash from '../utils/atbash.js';
 
 export const adminRout = express()
 
-function atbash(text) {
-  const abc = "abcdefghijklmnopqrstuvwxyz";
-  const reversed = "zyxwvutsrqponmlkjihgfedcba";
-
-  return text
-    .toLowerCase()
-    .split("")
-    .map(char => {
-      const index = abc.indexOf(char);
-      return index !== -1 ? reversed[index] : char;
-    })
-    .join("");
-}
 
 adminRout.post('/users', authToken, adminToken, (req, res)=>{
         const {agentCode, fullName, role} = req.body;
@@ -34,7 +22,7 @@ adminRout.post('/users', authToken, adminToken, (req, res)=>{
             if (!password){
              password= atbash(fullName)
             }
-        agents.push({id:agents.length+1, agentCode:agentCode, fullName:fullName, password:password, role:role})
+        agents.push({id:agents.length+1, agentCode:agentCode, name:fullName, password:password, role:role})
             res.status(201).json({user:{id:agents.length+1, agentCode:agentCode, fullName:fullName, role:role, initialPasswordHint:'Atbash if not any anuther password'}})
         
 }})
